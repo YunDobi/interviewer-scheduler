@@ -11,6 +11,7 @@ const [error, setError] = useState("");
 function reset() {
   setStudent("")
   setInterviewer(null)
+  setError("")
 };
 
 function Cancel() {
