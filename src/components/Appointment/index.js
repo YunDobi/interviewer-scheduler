@@ -78,8 +78,8 @@ export default function Appointment(props) {
       onDelete={() => transition(CONFIRM, true)}
       onEdit={edit}
     />)}
-  {mode === SAVING && <Status message={"saving"}/>}
-  {mode === DELETE && <Status message={"deleting"} />}
+  {mode === SAVING && <Status message={"Saving"}/>}
+  {mode === DELETE && <Status message={"Deleting"} />}
   {mode === CONFIRM && <Confirm onConfirm={cancel} onCancel={() => transition(SHOW)} message={"are you sure for delete?"}/>}
 
   {mode === CREATE && <Form interviewers={props.interviewers} onCancel={back} onSave={save} />}

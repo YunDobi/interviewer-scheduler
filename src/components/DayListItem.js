@@ -23,7 +23,7 @@ let spotList = classNames("day-list__item", {
   });
 
   return (
-    <li className={spotList} onClick={() => props.setDay(props.name)} selected={props.selected}>
+    <li className={spotList} data-testid="day" onClick={() => props.setDay(props.name)} selected={props.selected}>
       <h2 className="text--regular">{props.name}</h2> 
       <h3 className="text--light">{formatSpots(props.spots)}</h3>
     </li>
