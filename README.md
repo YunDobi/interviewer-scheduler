@@ -34,3 +34,9 @@ npm test
 ```sh
 npm run storybook
 ```
+
+## Runnig Cypress FrameWork
+
+```sh
+npm run cypress
+```
