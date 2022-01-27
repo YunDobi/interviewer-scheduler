@@ -4,6 +4,7 @@ export default function useVisualMode(initialMode) {
   const [mode, setMode] = useState(initialMode);
   const [history, setHistory] = useState([initialMode]);
 
+  //transition for the hook
   const transition = (newMode, replace = false) => {
     if (replace) {
       const newArr = [...history];
@@ -19,6 +20,7 @@ export default function useVisualMode(initialMode) {
     
   }
 
+  //back to the previous
   const back = () => {
     let newArr = [];
 

@@ -11,42 +11,40 @@ export function useApplicationData() {
 
   
 
-const setDay = day => setState((prev) => ({...prev, day}));
+  const setDay = day => setState((prev) => ({...prev, day}));
 
-function updateSpots(id) {
-  axios.get(`/api/days/`)
-  .then((res) => {
-    setState((prev) => ({...prev, days: res.data})
-  )})
-}
+  function updateSpots(id) {
+    axios.get(`/api/days/`)
+    .then((res) => {
+      setState((prev) => ({...prev, days: res.data})
+    )})
+  }
 
 
 
-  //bookInterview
-function bookInterview(id, interview) {
-  const appointment = {
-    ...state.appointments[id],
-    interview: { ...interview }
-  };
-  const appointments = {
-    ...state.appointments,
-    [id]: appointment
-  };
-  // console.log(appointments[id])
-  // console.log(state.day)
+//bookInterview
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
   
-  setState({
-    ...state,
-    appointments
-  });
+    setState({
+      ...state,
+      appointments
+    });
 
-  return axios.put(`/api/appointments/${id}`, appointment)
-  .then((response) => {setState((prev => ({...prev, appointments})));
-  updateSpots(id);
-  })
-}
+    return axios.put(`/api/appointments/${id}`, appointment)
+    .then((response) => {setState((prev => ({...prev, appointments})));
+    updateSpots(id);
+    })
+  }
 
-//cancelInterview
+  //cancelInterview
   function cancelInterview(id) {
     const appointment = {
       ...state.appointments[id],

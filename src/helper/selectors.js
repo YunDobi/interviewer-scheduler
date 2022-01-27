@@ -22,7 +22,6 @@ export function getInterview(state, interview) {
   const result = {...interview, interviewer}
 
   return result;
-
 };
 
 export function getInterviewerForDay (state, day) {
