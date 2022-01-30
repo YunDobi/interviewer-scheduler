@@ -22,10 +22,14 @@ function Cancel() {
 
 //validate for Form
 function validate() {
+  if (interviewer === null) {
+    setError("interviewer cannot be blank");
+    return;
+  }
   if (student === "") {
     setError("Student name cannot be blank");
     return;
-  }
+  } 
 
   setError("");
   props.onSave(student, interviewer);
