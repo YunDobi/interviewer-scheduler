@@ -25,7 +25,7 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
   );
 
-  //save
+  //save the Appointment
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -40,7 +40,7 @@ export default function Appointment(props) {
     .catch(error => transition(ERROR_SAVE, true));
   }
 
-    //delete
+    //delete for the Show or Form
     function cancel(name, interviewer) {
       const interview = {
         student: name,
@@ -56,7 +56,7 @@ export default function Appointment(props) {
     }
     
 
-    //edit
+    //edit for the Show or Form
     function edit(name, interviewer) {
       const interview = {
         student: name,
@@ -66,7 +66,7 @@ export default function Appointment(props) {
       transition(EDIT, true)
     }
 
-
+  //each Mode with components
   return(
 <article className="appointment">
   <Header time={props.time} />
@@ -78,8 +78,11 @@ export default function Appointment(props) {
       onDelete={() => transition(CONFIRM, true)}
       onEdit={edit}
     />)}
+
   {mode === SAVING && <Status message={"Saving"}/>}
+
   {mode === DELETE && <Status message={"Deleting"} />}
+
   {mode === CONFIRM && <Confirm onConfirm={cancel} onCancel={() => transition(SHOW)} message={"Are you sure would like to delete?"}/>}
 
   {mode === CREATE && <Form interviewers={props.interviewers} onCancel={back} onSave={save} />}
@@ -87,6 +90,7 @@ export default function Appointment(props) {
   {mode === EDIT && <Form interviewers={props.interviewers} onCancel={() => {transition(SHOW)}} onSave={save} student={props.interview.student} interviewer={props.interview.interviewer.id}/>}
 
   {mode === ERROR_SAVE && <Error message={"Failed to save"} onClose={back}/>}
+  
   {mode === ERROR_DELETE && <Error message={"Failed to delete"} onClose={() => {transition(SHOW)}}/>}
 
 </article>
