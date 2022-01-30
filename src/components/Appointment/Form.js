@@ -23,7 +23,7 @@ function Cancel() {
 //validate for Form
 function validate() {
   if (interviewer === null) {
-    setError("interviewer cannot be blank");
+    setError("Interviewer cannot be blank");
     return;
   }
   if (student === "") {
