@@ -17,7 +17,6 @@ export default function useVisualMode(initialMode) {
       setHistory(newArr)
       setMode(newMode)
     }
-    
   }
 
   //back to the previous

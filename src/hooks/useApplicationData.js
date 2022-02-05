@@ -22,7 +22,7 @@ export function useApplicationData() {
 
 
 
-//bookInterview
+//bookInterview and send to the Index and Form
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
