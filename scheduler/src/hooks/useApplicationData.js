@@ -75,5 +75,10 @@ export function useApplicationData() {
     });
   },[])
 
+  useEffect(() => {
+    let exampleSocket = new WebSocket("wss://www.example.com/socketserver", "protocolOne");
+
+  },[])
+
   return {state, setDay, bookInterview, cancelInterview, updateSpots}
 };
