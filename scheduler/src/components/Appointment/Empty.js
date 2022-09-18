@@ -8,6 +8,7 @@ export default function Empty(props) {
         src="images/add.png"
         alt="Add"
         onClick={props.onAdd}
+        style={{scale: 0.2}}
       />
     </main>
   )

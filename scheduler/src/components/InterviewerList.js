@@ -26,10 +26,12 @@ export default function InterviewerList (props) {
       </ul>
       </div>
 
+{/* this is the waitlist and have to insert the volunteers  */}
       <div className="waitlists">
         <h4 className="interviewers__header text--light">Waitlist</h4>
       </div>
     </section>
+    // -----------------------------
   )
 }
 InterviewerList.propTypes = {

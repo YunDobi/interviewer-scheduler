@@ -7,13 +7,11 @@ import classNames from 'classnames';
 export default function DayListItem(props) {
 
 function formatSpots (spot) {
+  let max = 10;
   if (spot === 0) {
-    return "no spots";
-  } else if (spot === 1) {
-    return "1 spot remaining"
-  }
-   else {
-    return `${spot} spots remaining`;
+    return `${max} appointments`;
+  } else {
+    return `${max - spot} appointments`;
   }
 }
   
