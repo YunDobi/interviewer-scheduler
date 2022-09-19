@@ -77,7 +77,8 @@ export function useApplicationData() {
 
   useEffect(() => {
     let exampleSocket = new WebSocket("wss://www.example.com/socketserver", "protocolOne");
-
+    exampleSocket.send("Here's some text that the server is urgently awaiting!");
+    exampleSocket.close();
   },[])
 
   return {state, setDay, bookInterview, cancelInterview, updateSpots}

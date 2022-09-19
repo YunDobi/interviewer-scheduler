@@ -44,3 +44,9 @@ npm run storybook
 ```sh
 npm run cypress
 ```
+## ToDo list
+
+install websocket for real-time
+build waitlist db max 3
+make to time select
+login and user page
