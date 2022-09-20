@@ -10,8 +10,22 @@ export function useApplicationData() {
   });
 
   
-
+  
   const setDay = day => setState((prev) => ({...prev, day}));
+  
+  useEffect(() => {
+    let socket = new WebSocket("ws://localhost:8001");
+  
+  
+    socket.onopen = function(e) {
+      socket.send("ping");
+    };
+
+    socket.onmessage = function(e) {
+      console.log(`${e.data}`);
+    }
+  },[])
+
 
   function updateSpots(id) {
     axios.get(`/api/days/`)
@@ -75,11 +89,6 @@ export function useApplicationData() {
     });
   },[])
 
-  useEffect(() => {
-    let exampleSocket = new WebSocket("wss://www.example.com/socketserver", "protocolOne");
-    exampleSocket.send("Here's some text that the server is urgently awaiting!");
-    exampleSocket.close();
-  },[])
 
   return {state, setDay, bookInterview, cancelInterview, updateSpots}
 };

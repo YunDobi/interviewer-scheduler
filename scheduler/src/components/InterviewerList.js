@@ -29,7 +29,7 @@ export default function InterviewerList (props) {
 {/* this is the waitlist and have to insert the volunteers  */}
       <div className="waitlists">
         <h4 className="interviewers__header text--light">Waitlist</h4>
-        <ul className="interviewers__list">
+        {/* <ul className="interviewers__list">
       {props.interviewers.map((interviewer)=> {
         return (
         <InterviewerListItem 
@@ -43,7 +43,7 @@ export default function InterviewerList (props) {
         )
       }
       )}
-      </ul>
+      </ul> */}
       </div>
     </section>
     // -----------------------------
