@@ -4,5 +4,8 @@ import ReactDOM from "react-dom";
 import "index.scss";
 
 import Application from "components/Application";
+import App from "app";
 
-ReactDOM.render(<Application />, document.getElementById("root"));
+ReactDOM.render(
+  <App />, document.getElementById("root")
+);
