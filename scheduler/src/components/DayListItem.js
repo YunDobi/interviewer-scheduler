@@ -5,6 +5,7 @@ import classNames from 'classnames';
 
 
 export default function DayListItem(props) {
+  // console.log(props)
 
 function formatSpots (spot) {
   let max = 10;

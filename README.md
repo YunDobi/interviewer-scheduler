@@ -50,3 +50,8 @@ install websocket for real-time
 build waitlist db max 3
 make to time select
 login and user page
+
+
+appointments = timeslot
+interviewers = volunteers
+interviews = events

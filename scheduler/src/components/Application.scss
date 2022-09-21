@@ -36,3 +36,22 @@
   padding: 0 $spacing;
   width: 100%;
 }
+
+.LoginContainer {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  height: 600px;
+  min-width: 400px;
+}
+
+.LoginBody {
+  display: flex;
+  flex-direction:column;
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
+}

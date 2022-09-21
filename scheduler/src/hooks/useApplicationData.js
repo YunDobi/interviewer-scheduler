@@ -13,18 +13,18 @@ export function useApplicationData() {
   
   const setDay = day => setState((prev) => ({...prev, day}));
   
-  useEffect(() => {
-    let socket = new WebSocket("ws://localhost:8001");
+  // useEffect(() => {
+  //   let socket = new WebSocket("ws://localhost:8001");
   
   
-    socket.onopen = function(e) {
-      socket.send("ping");
-    };
+  //   socket.onopen = function(e) {
+  //     socket.send("ping");
+  //   };
 
-    socket.onmessage = function(e) {
-      console.log(`${e.data}`);
-    }
-  },[])
+  //   socket.onmessage = function(e) {
+  //     console.log(`${e.data}`);
+  //   }
+  // },[])
 
 
   function updateSpots(id) {
