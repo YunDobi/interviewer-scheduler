@@ -10,6 +10,7 @@ import Confirm from './Confirm';
 import Error from './Error';
 
 export default function Appointment(props) {
+  // console.log(props)
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -22,18 +23,8 @@ export default function Appointment(props) {
 
 
   const { mode, transition, back } = useVisualMode(
-    props.interview ? SHOW : EMPTY
+    props.events ? SHOW : EMPTY
   );
-
-  // useEffect(() => {
-  //   if (props.interview && mode === EMPTY) {
-  //     console.log(props.interview)
-  //     // transition(SHOW)
-  //   }
-  //   if (props.interview === null && mode === SHOW) {
-  //    transition(EMPTY);
-  //   }
-  //  }, [props.interview, transition, mode]);
 
   //save the Appointment
   function save(name, interviewer) {
