@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 
 
 export default function InterviewerList (props) {
+  console.log("list", props)
   return (
     <section className="interviewers">
-      <div className="volunteers">
+      <div className="volunteers" style={{marginRight: "20px"}}>
       <h4 className="interviewers__header text--light">Volunteers</h4>
       <ul className="interviewers__list">
       {props.interviewers.map((interviewer)=> {
@@ -29,8 +30,8 @@ export default function InterviewerList (props) {
 {/* this is the waitlist and have to insert the volunteers  */}
       <div className="waitlists">
         <h4 className="interviewers__header text--light">Waitlist</h4>
-        {/* <ul className="interviewers__list">
-      {props.interviewers.map((interviewer)=> {
+        <ul className="interviewers__list">
+      {props.waitlist.map((interviewer)=> {
         return (
         <InterviewerListItem 
           key={interviewer.id}
@@ -43,7 +44,7 @@ export default function InterviewerList (props) {
         )
       }
       )}
-      </ul> */}
+      </ul>
       </div>
     </section>
     // -----------------------------

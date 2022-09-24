@@ -10,7 +10,7 @@ import Confirm from './Confirm';
 import Error from './Error';
 
 export default function Appointment(props) {
-  // console.log(props)
+  // console.log("props", props)
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -23,7 +23,7 @@ export default function Appointment(props) {
 
 
   const { mode, transition, back } = useVisualMode(
-    props.events ? SHOW : EMPTY
+    props.interview ? SHOW : EMPTY
   );
 
   //save the Appointment
@@ -74,10 +74,11 @@ export default function Appointment(props) {
   {mode === EMPTY && <Empty onAdd={() => {console.log("Clicked onAdd"); transition(CREATE)} } />}
   {mode === SHOW && (
     <Show
-      student={props.interview.student}
-      interviewer={props.interview.interviewer}
+      volunteers={props.interview.volunteers}
+      interviewer={props.interview.waitlist}
       onDelete={() => transition(CONFIRM, true)}
       onEdit={edit}
+      allList={props.interviewers}
     />)}
 
   {mode === SAVING && <Status message={"Saving"}/>}
@@ -88,7 +89,7 @@ export default function Appointment(props) {
 
   {mode === CREATE && <Form interviewers={props.interviewers} onCancel={back} onSave={save} />}
 
-  {mode === EDIT && <Form interviewers={props.interviewers} onCancel={() => {transition(SHOW)}} onSave={save} student={props.interview.student} interviewer={props.interview.interviewer.id}/>}
+  {mode === EDIT && <Form interviewers={props.interviewers} onCancel={() => {transition(SHOW)}} onSave={save} student={props.interview.volunteers} interviewer={props.interview.waitlist}/>}
 
   {mode === ERROR_SAVE && <Error message={"Failed to save"} onClose={() => transition(SHOW)}/>}
   

@@ -5,15 +5,11 @@ import classNames from 'classnames';
 
 
 export default function DayListItem(props) {
-  // console.log(props)
+  console.log(props)
 
 function formatSpots (spot) {
   let max = 10;
-  if (spot === 0) {
-    return `${max} appointments`;
-  } else {
-    return `${max - spot} appointments`;
-  }
+  return `${max - spot} appointments`;
 }
   
 let spotList = classNames("day-list__item", {

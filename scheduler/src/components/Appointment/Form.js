@@ -4,6 +4,14 @@ import Button from "components/Button";
 
 export default function Form (props) {
   console.log(props)
+  
+  const filterStudent = (list) => {
+    let students = []
+    for (let i = 0; i < list.length; i++) {
+      students.push(props.interviewers[i])
+    }
+    return students;
+  }
 
 const [student, setStudent] = useState(props.student || "");
 const [interviewer, setInterviewer] = useState(props.interviewer || null);
@@ -53,9 +61,10 @@ return (
     </form>
     <section className="appointment__validation">{error}</section>
     <InterviewerList 
-      interviewers={props.interviewers}
+      interviewers={filterStudent(props.student)}
       onChange={setInterviewer}
-      value={interviewer}
+      value={props.student}
+      waitlist={filterStudent(props.interviewer)}
     />
   </section>
   <section className="appointment__card-right">
