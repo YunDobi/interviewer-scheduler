@@ -10,7 +10,7 @@ import Confirm from './Confirm';
 import Error from './Error';
 
 export default function Appointment(props) {
-  // console.log("props", props)
+  console.log("props", props)
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -27,10 +27,12 @@ export default function Appointment(props) {
   );
 
   //save the Appointment
-  function save(name, interviewer) {
+  function save(name) {
+
     const interview = {
-      student: name,
-      interviewer
+      volunteers: [],
+      waitlist: [],
+      // interviewer
     
     };
     transition(SAVING)
@@ -43,14 +45,16 @@ export default function Appointment(props) {
 
     //delete for the Show or Form
     function cancel(name, interviewer) {
+      console.log(props)
       const interview = {
-        student: name,
-        interviewer
+        volunteers: [],
+        waitlist: []
       
       };
       transition(DELETE)
-      props.cancelInterview(props.id, interview)
+      props.cancelInterview(props.id)
       .then(() => {
+        console.log(props)
         transition(EMPTY)
       }) 
       .catch(error => transition(ERROR_DELETE, true));

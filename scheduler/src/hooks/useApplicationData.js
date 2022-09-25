@@ -40,7 +40,7 @@ export function useApplicationData() {
   function bookInterview(id, interview) {
     const appointment = {
       ...state.appointments[id],
-      interview: { ...interview }
+      volunteer: { ...interview }
     };
     const appointments = {
       ...state.appointments,
@@ -60,9 +60,10 @@ export function useApplicationData() {
 
   //cancelInterview
   function cancelInterview(id) {
+    console.log(id)
     const appointment = {
       ...state.appointments[id],
-      interview: { interview: null }
+      volunteer: { volunteer: null }
     };
     const appointments = {
       ...state.appointments,

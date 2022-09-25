@@ -7,18 +7,21 @@ export default function Form (props) {
   
   const filterStudent = (list) => {
     let students = []
+    if (interviewer === null) {
+      return students;
+    }
     for (let i = 0; i < list.length; i++) {
       students.push(props.interviewers[i])
     }
     return students;
   }
 
-const [student, setStudent] = useState(props.student || "");
+const [volunteer, setVolunteer] = useState(props.student || "");
 const [interviewer, setInterviewer] = useState(props.interviewer || null);
 const [error, setError] = useState("");
 
 function reset() {
-  setStudent("")
+  setVolunteer("")
   setInterviewer(null)
   setError("")
 };
@@ -31,17 +34,17 @@ function Cancel() {
 
 //validate for Form
 function validate() {
-  if (interviewer === null) {
-    setError("Interviewer cannot be blank");
-    return;
-  }
-  if (student === "") {
+  // if (interviewer === null) {
+  //   setError("Interviewer cannot be blank");
+  //   return;
+  // }
+  if (volunteer === "") {
     setError("Student name cannot be blank");
     return;
   } 
 
   setError("");
-  props.onSave(student, interviewer);
+  props.onSave(volunteer, interviewer);
 }
 
 return (
@@ -54,8 +57,8 @@ return (
         name="name"
         type="text"
         placeholder="Enter Student Name"
-        value= {student}
-        onChange={(event) => setStudent(event.target.value)}
+        value= {volunteer}
+        onChange={(event) => setVolunteer(event.target.value)}
         data-testid="student-name-input"
       />
     </form>

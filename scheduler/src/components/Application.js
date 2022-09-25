@@ -21,7 +21,7 @@ const interviewers = getInterviewerForDay(state, state.day);
 
 const appointments =  dailyAppointments.map((appointment)=> {
   const interview = getInterview(state, appointment.volunteer);
-  // console.log(interview)
+  console.log(appointment)
   return (
     <Appointment 
     key={appointment.id}
