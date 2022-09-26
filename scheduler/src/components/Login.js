@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import DayList from './DayList';
 import "components/Application.scss";
 import Button from './Button';
+import './login.scss';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
   const {
@@ -11,6 +13,15 @@ export default function Login() {
   } = useApplicationData();
   const [student, setStudent] = useState("")
   const [password, setPassword] = useState("")
+
+  const navigate = useNavigate()
+  const navigateFilter = (name) => {
+    if (name === "admin") {
+      navigate("/main")
+    } else {
+      navigate("/")
+    }
+  }
 
 
   return (
@@ -39,8 +50,8 @@ export default function Login() {
     </section>
 
     <section className='LoginContainer'>
-      <h3 style={{marginBottom:"50px"}}>Who are you?</h3>
-      <form autoComplete="off" className='LoginBody' onSubmit={(event) => event.preventDefault()}>
+      <h3 className='title'>LOGIN</h3>
+      <form autoComplete="off" className='LoginBody'>
       {/* input of the Form with name  */}
       <input
         className="login_name"
@@ -60,7 +71,7 @@ export default function Login() {
         onChange={(event) => setPassword(event.target.value)}
         data-testid="student-name-input"
       />
-      <Button confirm onClick={console.log(student, password)}>Login</Button>
+      <Button confirm onClick={() => navigateFilter(student)}>Login</Button>
     </form>
     </section>
     </main>
