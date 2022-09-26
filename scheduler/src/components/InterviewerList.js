@@ -11,7 +11,7 @@ export default function InterviewerList (props) {
       <div className="volunteers" style={{marginRight: "20px"}}>
       <h4 className="interviewers__header text--light">Volunteers</h4>
       <ul className="interviewers__list">
-      {/* {props.interviewers.map((interviewer)=> {
+      {props.interviewers.map((interviewer)=> {
         return (
         <InterviewerListItem 
           key={interviewer.id}
@@ -24,7 +24,7 @@ export default function InterviewerList (props) {
         )
       }
       )
-      } */}
+      }
       </ul>
       </div>
 
@@ -33,7 +33,7 @@ export default function InterviewerList (props) {
         <h4 className="interviewers__header text--light">Waitlist</h4>
         <ul className="interviewers__list">
 
-      {/* {props.waitlist.map((interviewer)=> {
+      {props.waitlist.map((interviewer)=> {
         return (
         <InterviewerListItem 
           key={interviewer.id}
@@ -45,7 +45,7 @@ export default function InterviewerList (props) {
           />
         )
       }
-      )} */}
+      )}
       </ul>
       </div>
     </section>

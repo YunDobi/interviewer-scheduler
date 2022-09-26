@@ -17,6 +17,7 @@ export default function Form (props) {
   }
 
 const [volunteer, setVolunteer] = useState(props.student || "");
+const [title, setTitle] = useState(props.title || "");
 const [interviewer, setInterviewer] = useState(props.interviewer || null);
 const [error, setError] = useState("");
 

@@ -31,6 +31,7 @@ const appointments =  dailyAppointments.map((appointment)=> {
     interviewers={interviewers}
     bookInterview={bookInterview}
     cancelInterview={cancelInterview}
+    title={null}
   />)})
 
 
