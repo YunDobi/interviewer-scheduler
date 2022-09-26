@@ -5,6 +5,11 @@ import Button from "components/Button";
 export default function Form (props) {
   console.log(props)
   
+  const [volunteer, setVolunteer] = useState(props.student || "");
+  const [title, setTitle] = useState(props.title || "");
+  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [error, setError] = useState("");
+  
   const filterStudent = (list) => {
     let students = []
     if (interviewer === null) {
@@ -15,11 +20,6 @@ export default function Form (props) {
     }
     return students;
   }
-
-const [volunteer, setVolunteer] = useState(props.student || "");
-const [title, setTitle] = useState(props.title || "");
-const [interviewer, setInterviewer] = useState(props.interviewer || null);
-const [error, setError] = useState("");
 
 function reset() {
   setVolunteer("")

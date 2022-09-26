@@ -93,7 +93,7 @@ export default function Appointment(props) {
 
   {mode === CREATE && <Form interviewers={props.interviewers} onCancel={back} onSave={save} title={props.title} />}
 
-  {mode === EDIT && <Form interviewers={props.interviewers} onCancel={() => {transition(SHOW)}} title={props.title} onSave={save} student={props.interview.volunteers} interviewer={props.interview.waitlist}/>}
+  {mode === EDIT && <Form interviewers={props.interviewers} onCancel={() => {transition(SHOW)}} onSave={save} student={props.interview.volunteers} interviewer={props.interview.waitlist}/>}
 
   {mode === ERROR_SAVE && <Error message={"Failed to save"} onClose={() => transition(SHOW)}/>}
   
