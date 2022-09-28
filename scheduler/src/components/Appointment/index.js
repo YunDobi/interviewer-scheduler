@@ -69,6 +69,8 @@ export default function Appointment(props) {
         waitlist: interviewer
         
       };
+
+      interview.waitlist = [3,4,6]
       console.log(interview, props)
       props.bookInterview(props.id, interview)
       .then(() => {
