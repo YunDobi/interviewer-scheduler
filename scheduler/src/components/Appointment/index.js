@@ -70,8 +70,20 @@ export default function Appointment(props) {
         
       };
 
-      interview.waitlist = [3,4,6]
-      console.log(interview, props)
+      // interview.waitlist = [3,4,6]
+      console.log(interview.waitlist.length >= 3)
+      if (interview.volunteers.length < 2) {
+        interview.volunteers.push(Number(name))
+      } else if (interview.volunteers.length >= 2) {
+        if (interview.waitlist.length >= 3) {
+          transition(ERROR_SAVE,true)  
+        } else {
+          interview.waitlist.push(Number(name))
+        }
+      }
+      console.log(name, interview.volunteers)
+//------------------------------------------------------
+
       props.bookInterview(props.id, interview)
       .then(() => {
         console.log("sent")
@@ -113,6 +125,13 @@ export default function Appointment(props) {
       
       </article>
         )
+
+
+
+
+
+
+       //main page for volunteers 
   } else {
     return(
   <article className="appointment">
@@ -123,7 +142,7 @@ export default function Appointment(props) {
         volunteers={props.interview.volunteers}
         waitlist={props.interview.waitlist}
         onDelete={() => transition(CONFIRM, true)}
-        onEdit={edit}
+        onEdit={() => transition(EDIT, true)}
         allList={props.interviewers}
       />)}
   
@@ -135,7 +154,8 @@ export default function Appointment(props) {
   
     {/* {mode === CREATE && <Form interviewers={props.interviewers} onCancel={back} onSave={save} title={props.title} />} */}
   
-    {mode === EDIT && <Form interviewers={props.interviewers} onCancel={() => {transition(SHOW)}} onSave={save} volunteers={props.interview.volunteers} waitlist={props.interview.waitlist}/>}
+    {mode === EDIT && <Form interviewers={props.interviewers} onCancel={() => {transition(SHOW)}} onSave={edit} volunteers={props.interview.volunteers} waitlist={props.interview.waitlist}/>}
+      
   
     {mode === ERROR_SAVE && <Error message={"Failed to save"} onClose={() => transition(SHOW)}/>}
     

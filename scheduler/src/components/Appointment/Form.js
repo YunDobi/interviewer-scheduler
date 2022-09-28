@@ -42,13 +42,14 @@ function validate() {
   //   setError("Interviewer cannot be blank");
   //   return;
   // }
-  if (volunteer === "") {
+  if (title === "") {
     setError("Student name cannot be blank");
     return;
   } 
 
   setError("");
-  props.onSave(props.volunteers, interviewer);
+  
+  props.onSave(title, interviewer);
 }
 
 return (
@@ -61,8 +62,8 @@ return (
         name="name"
         type="text"
         placeholder="Enter Student Name"
-        value= {volunteer}
-        onChange={(event) => setVolunteer(event.target.value)}
+        value= {title}
+        onChange={(event) => setTitle(event.target.value)}
         data-testid="student-name-input"
       />
     </form>

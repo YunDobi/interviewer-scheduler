@@ -6,11 +6,11 @@ export default function Show (props) {
   
   const nameFilter = (idArray) => {
     let givenName = ""
-    if (idArray === null) {
+    if (idArray === undefined|| idArray.length === 0) {
       return givenName;
     }
     for (let i = 0; i < idArray.length; i++) {
-      givenName += allList[i].name;
+      givenName += allList[idArray[i]+1].name;
       if (i !== idArray.length -1) {
         givenName += ", "
       }
