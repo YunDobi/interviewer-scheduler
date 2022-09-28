@@ -13,11 +13,15 @@ export default function Login() {
   } = useApplicationData();
   const [student, setStudent] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
 
   const navigate = useNavigate()
   const navigateFilter = (name) => {
-    if (name === "admin") {
-      navigate("/main")
+    if (name === "") {
+      setError("can not be empty student")
+    } 
+    else if (name === "admin") {
+      navigate("/admin")
     } else {
       navigate("/")
     }
@@ -50,8 +54,8 @@ export default function Login() {
     </section>
 
     <section className='LoginContainer'>
-      <h3 className='title'>LOGIN</h3>
-      <form autoComplete="off" className='LoginBody'>
+      <h3 className='title'>LOGIN AS {student}</h3>
+      <form autoComplete="off" className='LoginBody' onSubmit={(event) => event.preventDefault()}>
       {/* input of the Form with name  */}
       <input
         className="login_name"
@@ -62,6 +66,7 @@ export default function Login() {
         onChange={(event) => setStudent(event.target.value)}
         data-testid="student-name-input"
       />
+      <section className="appointment__validation">{error}</section>
       <input
         className="login_name"
         name="password"

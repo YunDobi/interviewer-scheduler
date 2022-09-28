@@ -5,20 +5,23 @@ import Button from "components/Button";
 export default function Form (props) {
   console.log(props)
   
-  const [volunteer, setVolunteer] = useState(props.student || "");
+  const [volunteer, setVolunteer] = useState(props.volunteers || "");
   const [title, setTitle] = useState(props.title || "");
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
+  const [interviewer, setInterviewer] = useState(props.waitlist || null);
   const [error, setError] = useState("");
   
   const filterStudent = (list) => {
     let students = []
-    if (interviewer === null) {
+    console.log(list)
+    if (interviewer === null || undefined) {
+      return students;
+    } else {
+      for (let i = 0; i < list.length; i++) {
+        students.push(props.interviewers[i])
+      }
       return students;
     }
-    for (let i = 0; i < list.length; i++) {
-      students.push(props.interviewers[i])
-    }
-    return students;
+
   }
 
 function reset() {
@@ -45,7 +48,7 @@ function validate() {
   } 
 
   setError("");
-  props.onSave(volunteer, interviewer);
+  props.onSave(props.volunteers, interviewer);
 }
 
 return (
@@ -65,10 +68,10 @@ return (
     </form>
     <section className="appointment__validation">{error}</section>
     <InterviewerList 
-      interviewers={filterStudent(props.student)}
+      interviewers={filterStudent(props.volunteers)}
       onChange={setInterviewer}
-      value={props.student}
-      waitlist={filterStudent(props.interviewer)}
+      value={props.volunteers}
+      waitlist={filterStudent(props.waitlist)}
     />
   </section>
   <section className="appointment__card-right">

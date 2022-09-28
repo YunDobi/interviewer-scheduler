@@ -8,9 +8,10 @@ import useVisualMode from 'hooks/useVisualMode';
 import Status from './Status';
 import Confirm from './Confirm';
 import Error from './Error';
+import { useLocation } from 'react-router-dom';
 
 export default function Appointment(props) {
-  console.log("props", props)
+  // console.log("props", props)
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -64,41 +65,82 @@ export default function Appointment(props) {
     //edit for the Show or Form
     function edit(name, interviewer) {
       const interview = {
-        student: name,
-        interviewer
-      
+        volunteers: props.interview.volunteers,
+        waitlist: interviewer
+        
       };
-      transition(EDIT, true)
+      console.log(interview, props)
+      props.bookInterview(props.id, interview)
+      .then(() => {
+        console.log("sent")
+        transition(SHOW, true)
+      })
+      .catch(error => transition(ERROR_SAVE, true));
     }
 
+    const location = useLocation();
+
   //each Mode with components
-  return(
-<article className="appointment">
-  <Header time={props.time} />
-  {mode === EMPTY && <Empty onAdd={() => {console.log("Clicked onAdd"); transition(CREATE)} } />}
-  {mode === SHOW && (
-    <Show
-      volunteers={props.interview.volunteers}
-      interviewer={props.interview.waitlist}
-      onDelete={() => transition(CONFIRM, true)}
-      onEdit={edit}
-      allList={props.interviewers}
-    />)}
-
-  {mode === SAVING && <Status message={"Saving"}/>}
-
-  {mode === DELETE && <Status message={"Deleting"} />}
-
-  {mode === CONFIRM && <Confirm onConfirm={cancel} onCancel={() => transition(SHOW)} message={"Are you sure would like to delete?"}/>}
-
-  {mode === CREATE && <Form interviewers={props.interviewers} onCancel={back} onSave={save} title={props.title} />}
-
-  {mode === EDIT && <Form interviewers={props.interviewers} onCancel={() => {transition(SHOW)}} onSave={save} student={props.interview.volunteers} interviewer={props.interview.waitlist}/>}
-
-  {mode === ERROR_SAVE && <Error message={"Failed to save"} onClose={() => transition(SHOW)}/>}
+  if (location.pathname === '/admin') {
+    return(
+      <article className="appointment">
+        <Header time={props.time} />
+        {mode === EMPTY && <Empty onAdd={() => {console.log("Clicked onAdd"); transition(CREATE)} } admin={true} />}
+        {mode === SHOW && (
+          <Show
+            volunteers={props.interview.volunteers}
+            waitlist={props.interview.waitlist}
+            onDelete={() => transition(CONFIRM, true)}
+            onEdit={() => transition(EDIT, true)}
+            allList={props.interviewers}
+          />)}
+      
+        {mode === SAVING && <Status message={"Saving"}/>}
+      
+        {mode === DELETE && <Status message={"Deleting"} />}
+      
+        {mode === CONFIRM && <Confirm onConfirm={cancel} onCancel={() => transition(SHOW)} message={"Are you sure would like to delete?"}/>}
+      
+        {mode === CREATE && <Form interviewers={props.interviewers} onCancel={back} onSave={save} />}
+      
+        {mode === EDIT && <Form interviewers={props.interviewers} onCancel={() => {transition(SHOW)}} onSave={edit} volunteers={props.interview.volunteers} waitlist={props.interview.waitlist}/>}
+      
+        {mode === ERROR_SAVE && <Error message={"Failed to save"} onClose={() => transition(SHOW)}/>}
+        
+        {mode === ERROR_DELETE && <Error message={"Failed to delete"} onClose={() => {transition(SHOW)}}/>}
+      
+      </article>
+        )
+  } else {
+    return(
+  <article className="appointment">
+    <Header time={props.time} />
+    {mode === EMPTY && <Empty onAdd={() => {console.log("Clicked onAdd"); transition(CREATE)} } admin={false} />}
+    {mode === SHOW && (
+      <Show
+        volunteers={props.interview.volunteers}
+        waitlist={props.interview.waitlist}
+        onDelete={() => transition(CONFIRM, true)}
+        onEdit={edit}
+        allList={props.interviewers}
+      />)}
   
-  {mode === ERROR_DELETE && <Error message={"Failed to delete"} onClose={() => {transition(SHOW)}}/>}
+    {mode === SAVING && <Status message={"Saving"}/>}
+  
+    {mode === DELETE && <Status message={"Deleting"} />}
+  
+    {mode === CONFIRM && <Confirm onConfirm={cancel} onCancel={() => transition(SHOW)} message={"Are you sure would like to delete?"}/>}
+  
+    {/* {mode === CREATE && <Form interviewers={props.interviewers} onCancel={back} onSave={save} title={props.title} />} */}
+  
+    {mode === EDIT && <Form interviewers={props.interviewers} onCancel={() => {transition(SHOW)}} onSave={save} volunteers={props.interview.volunteers} waitlist={props.interview.waitlist}/>}
+  
+    {mode === ERROR_SAVE && <Error message={"Failed to save"} onClose={() => transition(SHOW)}/>}
+    
+    {mode === ERROR_DELETE && <Error message={"Failed to delete"} onClose={() => {transition(SHOW)}}/>}
+  
+  </article>
+    )
 
-</article>
-  )
+  }
 }
