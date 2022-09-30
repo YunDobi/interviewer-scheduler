@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from "components/Appointment/header";
 import Show from "components/Appointment/Show";
 import Empty from "components/Appointment/Empty";
@@ -11,7 +11,7 @@ import Error from './Error';
 import { useLocation } from 'react-router-dom';
 
 export default function Appointment(props) {
-  // console.log("props", props)
+  console.log("props", props)
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE";
@@ -21,6 +21,7 @@ export default function Appointment(props) {
   const EDIT = "EDIT";
   const ERROR_SAVE = "ERROR_SAVE"
   const ERROR_DELETE = "ERROR_DELETE"
+  // const [showTitle, setShowTitle] = useState("show")
 
 
   const { mode, transition, back } = useVisualMode(
@@ -28,7 +29,8 @@ export default function Appointment(props) {
   );
 
   //save the Appointment
-  function save(name) {
+  function save(name, interviewer) {
+    console.log(props.id)
 
     const interview = {
       volunteers: [],
@@ -37,7 +39,7 @@ export default function Appointment(props) {
     
     };
     transition(SAVING)
-    props.bookInterview(props.id, interview)
+    props.bookInterview(props.id, interview, name)
     .then(() => {
       transition(SHOW)
     })
@@ -84,7 +86,7 @@ export default function Appointment(props) {
       console.log(name, interview.volunteers)
 //------------------------------------------------------
 
-      props.bookInterview(props.id, interview)
+      props.bookInterview(props.id, interview, name)
       .then(() => {
         console.log("sent")
         transition(SHOW, true)
@@ -107,6 +109,7 @@ export default function Appointment(props) {
             onDelete={() => transition(CONFIRM, true)}
             onEdit={() => transition(EDIT, true)}
             allList={props.interviewers}
+            title = {props.title}
           />)}
       
         {mode === SAVING && <Status message={"Saving"}/>}

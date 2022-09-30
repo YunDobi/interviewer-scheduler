@@ -37,11 +37,12 @@ export function useApplicationData() {
 
 
 //bookInterview and send to the Index and Form
-  function bookInterview(id, interview) {
+  function bookInterview(id, interview, name) {
     const appointment = {
       ...state.appointments[id],
       volunteer: { ...interview }
     };
+    appointment.title = name
     const appointments = {
       ...state.appointments,
       [id]: appointment

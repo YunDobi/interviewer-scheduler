@@ -22,7 +22,7 @@ export default function Show (props) {
     <main className="appointment__card appointment__card--show">
   <section className="appointment__card-left">
 {/* -- */}
-    <h2 className="text--regular">{nameFilter(props.volunteers)}</h2>
+    <h2 className="text--regular">{props.title}</h2>
     {/* -- */}
     <section className="interviewer" style={{display: "flex"}}>
       <h4 className="text--light">Volunteers:  </h4>

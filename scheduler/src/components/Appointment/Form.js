@@ -12,7 +12,7 @@ export default function Form (props) {
   
   const filterStudent = (list) => {
     let students = []
-    console.log(list)
+    // console.log(list)
     if (interviewer === null || undefined) {
       return students;
     } else {
@@ -38,10 +38,10 @@ function Cancel() {
 
 //validate for Form
 function validate() {
-  // if (interviewer === null) {
-  //   setError("Interviewer cannot be blank");
-  //   return;
-  // }
+  if (title === null) {
+    setError("Interviewer cannot be blank");
+    return;
+  }
   if (title === "") {
     setError("Student name cannot be blank");
     return;
@@ -49,6 +49,7 @@ function validate() {
 
   setError("");
   
+  // props.onTitle((e) => e = title)
   props.onSave(title, interviewer);
 }
 
