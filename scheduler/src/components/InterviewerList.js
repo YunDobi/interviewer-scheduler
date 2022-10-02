@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 
 export default function InterviewerList (props) {
-  // console.log("list", props)
+  console.log("list", props)
   return (
     <section className="interviewers">
       <div className="volunteers" style={{marginRight: "20px"}}>

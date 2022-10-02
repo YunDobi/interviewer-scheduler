@@ -30,12 +30,10 @@ export default function Appointment(props) {
 
   //save the Appointment
   function save(name, interviewer) {
-    console.log(props.id)
 
     const interview = {
       volunteers: [],
       waitlist: [],
-      // interviewer
     
     };
     transition(SAVING)
@@ -71,27 +69,59 @@ export default function Appointment(props) {
         waitlist: interviewer
         
       };
-
-      // interview.waitlist = [3,4,6]
-      console.log(interview.waitlist.length >= 3)
-      if (interview.volunteers.length < 2) {
-        interview.volunteers.push(Number(name))
-      } else if (interview.volunteers.length >= 2) {
-        if (interview.waitlist.length >= 3) {
-          transition(ERROR_SAVE,true)  
-        } else {
-          interview.waitlist.push(Number(name))
+      transition(SAVING)
+      
+      if (location.pathname === "/main") {
+        console.log(interview.volunteers)
+        
+        if (interview.volunteers.length < 2) {
+          interview.volunteers.push(Number(name))
+        } else if (interview.volunteers.length >= 2) {
+          if (interview.waitlist.length >= 3) {
+            transition(ERROR_SAVE,true)  
+          } else {
+            interview.waitlist.push(Number(name))
+          }
         }
-      }
-      console.log(name, interview.volunteers)
-//------------------------------------------------------
+        props.bookInterview(props.id, interview, name)
+        .then(() => {        
+          transition(SHOW, true)
+        })
+        .catch(error => transition(ERROR_SAVE, true));
 
-      props.bookInterview(props.id, interview, name)
-      .then(() => {
-        console.log("sent")
-        transition(SHOW, true)
-      })
-      .catch(error => transition(ERROR_SAVE, true));
+
+      } else if (interview.volunteers.length === 0) {
+        props.cancelInterview(props.id)
+        .then (() => {
+          props.bookInterview(props.id, interview, name)
+          .then(() => {        
+            transition(SHOW, true)
+          })
+          .catch(error => transition(ERROR_SAVE, true));
+        })
+        .catch(error =>  transition(ERROR_DELETE, true))
+
+
+      } else {
+        props.bookInterview(props.id, interview, name)
+        .then(() => {        
+          transition(SHOW, true)
+        })
+        .catch(error => transition(ERROR_SAVE, true));
+      }
+
+      //if sending from the main location, it will send the pushed the volunteers, and if it is sending from the admin, then delete the existing row because it will creat by them self. and then creat
+      // if (interview.volunteers.length < 2) {
+      //   interview.volunteers.push(Number(name))
+      // } else if (interview.volunteers.length >= 2) {
+      //   if (interview.waitlist.length >= 3) {
+      //     transition(ERROR_SAVE,true)  
+      //   } else {
+      //     interview.waitlist.push(Number(name))
+      //   }
+      // }
+      //------------------------------------------------------
+      console.log(interview.volunteers)
     }
 
     const location = useLocation();
@@ -147,6 +177,7 @@ export default function Appointment(props) {
         onDelete={() => transition(CONFIRM, true)}
         onEdit={() => transition(EDIT, true)}
         allList={props.interviewers}
+        title={props.title}
       />)}
   
     {mode === SAVING && <Status message={"Saving"}/>}
